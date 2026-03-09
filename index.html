@@ -108,7 +108,9 @@
             background: radial-gradient(circle, rgba(20,184,166,0.08) 0%, transparent 70%);
             border-radius: 50%;
         }
-        .hero-content { position: relative; z-index: 2; max-width: 650px; }
+        .hero-content { position: relative; z-index: 2; max-width: 500px; }
+        .hero-image { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: 45%; max-width: 500px; z-index: 2; }
+        @media(max-width: 992px) { .hero-image { display: none; } }
         .hero-subtitle {
             font-size: 14px;
             color: var(--primary);
@@ -282,11 +284,14 @@
             <div class="hero-content">
                 <p class="hero-subtitle fade-up">Hotel Boutique & Spa</p>
                 <h1 class="fade-up">Donde el Océano<br><span style="color:var(--primary);">Te Abraza</span></h1>
-                <p class="fade-up">Una experiencia única de relajación y lujo natural. Descubre la serenidad en cada ola.</p>
+                <p class="fade-up">Una experiencia única de relajación y lujo natural.</p>
                 <div class="fade-up" style="display:flex;gap:20px;flex-wrap:wrap;">
                     <a href="#reservar" class="btn btn-primary"><i class="fas fa-calendar-alt"></i> Reservar Ahora</a>
                     <a href="#habitaciones" class="btn" style="border:2px solid var(--dark);color:var(--dark);">Ver Habitaciones</a>
                 </div>
+            </div>
+            <div class="hero-image fade-up">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600" alt="Hotel" style="width:100%;border-radius:20px;box-shadow:0 30px 60px rgba(0,0,0,0.2);">
             </div>
         </div>
     </section>
@@ -299,7 +304,7 @@
             </div>
             <div class="rooms-grid">
                 <div class="room-card fade-up">
-                    <div class="room-image">🏖️<span class="room-badge">Más Popular</span></div>
+                    <div class="room-image"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400" alt="Suite" style="width:100%;height:260px;object-fit:cover;"><span class="room-badge">Más Popular</span></div>
                     <div class="room-content">
                         <h3>Suite Vista Mar</h3>
                         <p>Habitación espaciosa con balcón privado y vista panorámica al océano.</p>
@@ -307,7 +312,7 @@
                     </div>
                 </div>
                 <div class="room-card fade-up" style="animation-delay:0.1s">
-                    <div class="room-image">🌴</div>
+                    <div class="room-image"><img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400" alt="Villa" style="width:100%;height:260px;object-fit:cover;"></div>
                     <div class="room-content">
                         <h3>Villa Jardín</h3>
                         <p>Villa privada con jardín tropical y piscina individual.</p>
@@ -315,7 +320,7 @@
                     </div>
                 </div>
                 <div class="room-card fade-up" style="animation-delay:0.2s">
-                    <div class="room-image">✨</div>
+                    <div class="room-image"><img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400" alt="Presidencial" style="width:100%;height:260px;object-fit:cover;"></div>
                     <div class="room-content">
                         <h3>Suite Presidencial</h3>
                         <p>Lujo absoluto con jacuzzi, mayordomo y acceso exclusivo a playa.</p>
