@@ -3,180 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aurora Cove - Hotel Boutique">
     <title>Aurora Cove - Hotel Boutique</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        :root { --primary: #14b8a6; --primary-dark: #0d9488; --secondary: #134e4a; --dark: #1c1917; --light: #fafaf9; --gray: #78716c; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; background: #fafaf9; color: #1c1917; line-height: 1.7; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
-        .c { max-width: 1400px; margin: 0 auto; padding: 0 30px; }
-        .sec { padding: 100px 0; }
         
-        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-radius: 50px; cursor: pointer; transition: all 0.3s; border: none; text-decoration: none; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 10px 30px rgba(20,184,166,0.3); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(20,184,166,0.4); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
-        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: all 0.3s; }
-        .header.scrolled { background: rgba(250,250,249,0.95); backdrop-filter: blur(20px); padding: 12px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
-        .logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--dark); text-decoration: none; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: rgba(250,250,249,0.95); padding: 15px 0; z-index: 100; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 26px; font-weight: 700; color: #1c1917; text-decoration: none; }
+        nav { display: flex; gap: 25px; align-items: center; }
+        nav a { color: #1c1917; text-decoration: none; font-weight: 500; }
+        .btn { background: #14b8a6; color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; }
         
-        .hero { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(180deg, #fafaf9 0%, #f5f5f4 50%, #e7e5e4 100%); position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(20,184,166,0.1) 0%, transparent 70%); border-radius: 50%; }
-        .hero-content { position: relative; z-index: 2; max-width: 520px; }
-        .hero-subtitle { font-size: 13px; color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; font-weight: 500; }
-        .hero h1 { font-size: clamp(38px, 7vw, 65px); line-height: 1.1; margin-bottom: 18px; }
-        .hero p { font-size: 17px; color: var(--gray); margin-bottom: 30px; }
-        .hero-image { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: 45%; max-width: 450px; z-index: 2; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; background: linear-gradient(180deg, #fafaf9 0%, #f5f5f4 100%); }
+        .hero .container { display: flex; align-items: center; gap: 50px; }
+        .hero-content { flex: 1; }
+        .hero h1 { font-size: clamp(40px, 6vw, 70px); line-height: 1.1; margin-bottom: 18px; }
+        .hero h1 span { color: #14b8a6; }
+        .hero p { font-size: 18px; color: #78716c; margin-bottom: 30px; }
+        .hero-image { flex: 1; }
+        .hero-image img { width: 100%; max-width: 500px; border-radius: 20px; }
         
-        .section-title { font-size: clamp(30px, 5vw, 45px); margin-bottom: 12px; }
-        .section-subtitle { color: var(--gray); font-size: 16px; margin-bottom: 45px; }
-        
+        .rooms { padding: 100px 0; background: #fafaf9; }
+        .rooms h2 { font-size: 42px; text-align: center; margin-bottom: 15px; }
+        .rooms > .container > p { text-align: center; color: #78716c; margin-bottom: 50px; }
         .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .room-card { border-radius: 20px; overflow: hidden; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.06); transition: all 0.4s; }
-        .room-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(0,0,0,0.12); }
-        .room-image { height: 220px; position: relative; }
+        .room-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        .room-image { height: 220px; }
         .room-image img { width: 100%; height: 220px; object-fit: cover; }
-        .room-badge { position: absolute; top: 15px; left: 15px; background: white; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--primary); }
+        .room-badge { position: absolute; top: 15px; left: 15px; background: white; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; color: #14b8a6; }
         .room-content { padding: 25px; }
         .room-content h3 { font-size: 20px; margin-bottom: 10px; }
-        .room-content p { color: var(--gray); font-size: 14px; margin-bottom: 15px; }
-        .room-price { font-size: 24px; font-weight: 700; color: var(--primary); }
-        .room-price span { font-size: 13px; color: var(--gray); font-weight: 400; }
+        .room-content p { color: #78716c; font-size: 14px; margin-bottom: 15px; }
+        .room-price { font-size: 24px; font-weight: 700; color: #14b8a6; }
+        .room-price span { font-size: 13px; color: #78716c; font-weight: 400; }
         
+        .features { padding: 80px 0; background: #134e4a; color: white; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center; }
-        .feature-icon { width: 70px; height: 70px; margin: 0 auto 20px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--primary); }
-        .features-section { background: var(--secondary); color: white; padding: 80px 0; }
-        .features-section h3 { font-size: 20px; margin-bottom: 10px; }
-        .features-section p { color: rgba(255,255,255,0.7); font-size: 14px; }
+        .feature-icon { width: 70px; height: 70px; margin: 0 auto 20px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #14b8a6; }
         
-        .cta-section { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 80px 0; text-align: center; }
+        .cta { padding: 80px 0; background: linear-gradient(135deg, #14b8a6, #0d9488); text-align: center; color: white; }
+        .cta h2 { font-size: 42px; margin-bottom: 15px; }
         
-        .footer { background: var(--dark); color: white; padding: 60px 0 25px; }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
-        .footer-brand p { color: rgba(255,255,255,0.6); margin: 15px 0; font-size: 14px; }
-        .social-links { display: flex; gap: 10px; }
-        .social-link { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s; }
-        .social-link:hover { background: var(--primary); transform: translateY(-3px); }
-        .footer-title { font-size: 16px; margin-bottom: 18px; }
+        footer { background: #1c1917; color: white; padding: 60px 0 25px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-title { font-size: 16px; margin-bottom: 20px; }
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .footer-links a:hover { color: var(--primary); }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 35px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; color: rgba(255,255,255,0.4); margin-top: 40px; }
         
-        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-        
-        @media(max-width: 992px) { .footer-grid { grid-template-columns: 1fr 1fr; } .hero-image { display: none; } .hero-content { max-width: 100%; } }
-        @media(max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .hero .container { flex-direction: column; text-align: center; }
+            .hero-image { display: none; }
+        }
     </style>
 </head>
 <body>
-    <header class="header" id="header">
-        <div class="c">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-                <a href="#" class="logo">Aurora Cove</a>
-                <nav style="display:flex;gap:25px;align-items:center;">
-                    <a href="#habitaciones" style="color:var(--dark);text-decoration:none;font-weight:500;">Habitaciones</a>
-                    <a href="#reservar" class="btn btn-primary" style="padding:10px 22px;">Reservar</a>
-                </nav>
-            </div>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Aurora Cove</a>
+            <nav>
+                <a href="#habitaciones">Habitaciones</a>
+                <a href="#reservar" class="btn">Reservar</a>
+            </nav>
         </div>
     </header>
 
     <section class="hero">
-        <div class="c">
+        <div class="container">
             <div class="hero-content">
-                <p class="hero-subtitle fade-up">Hotel Boutique & Spa</p>
-                <h1 class="fade-up">Donde el Océano<br><span style="color:var(--primary);">Te Abraza</span></h1>
-                <p class="fade-up">Una experiencia única de relajación y lujo natural.</p>
-                <div class="fade-up" style="display:flex;gap:15px;flex-wrap:wrap;">
-                    <a href="#reservar" class="btn btn-primary"><i class="fas fa-calendar-alt"></i> Reservar</a>
-                    <a href="#habitaciones" class="btn" style="border:2px solid var(--dark);color:var(--dark);">Habitaciones</a>
-                </div>
+                <h1>Donde el Océano<br><span>Te Abraza</span></h1>
+                <p>Una experiencia única de relajación y lujo natural.</p>
+                <a href="#reservar" class="btn">Reservar</a>
             </div>
-            <div class="hero-image fade-up">
-                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600" alt="Hotel" style="width:100%;border-radius:20px;box-shadow:0 30px 60px rgba(0,0,0,0.2);">
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600" alt="Hotel">
             </div>
         </div>
     </section>
 
-    <section class="sec" id="habitaciones">
-        <div class="c">
-            <div class="tc" style="margin-bottom:50px;">
-                <h2 class="section-title fade-up">Nuestras Habitaciones</h2>
-                <p class="section-subtitle fade-up">Espacios diseñados para tu comodidad</p>
-            </div>
+    <section class="rooms" id="habitaciones">
+        <div class="container">
+            <h2>Nuestras Habitaciones</h2>
+            <p>Espacios diseñados para tu comodidad</p>
             <div class="rooms-grid">
-                <div class="room-card fade-up">
-                    <div class="room-image"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400" alt="Suite"><span class="room-badge">Más Popular</span></div>
-                    <div class="room-content"><h3>Suite Vista Mar</h3><p>Balcón privado con vista panorámica.</p><div class="room-price">$180 <span>/ noche</span></div></div>
-                </div>
-                <div class="room-card fade-up" style="animation-delay:0.1s">
-                    <div class="room-image"><img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400" alt="Villa"></div>
-                    <div class="room-content"><h3>Villa Jardín</h3><p>Villa privada con jardín y piscina.</p><div class="room-price">$250 <span>/ noche</span></div></div>
-                </div>
-                <div class="room-card fade-up" style="animation-delay:0.2s">
-                    <div class="room-image"><img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400" alt="Presidencial"></div>
-                    <div class="room-content"><h3>Suite Presidencial</h3><p>Jacuzzi y acceso exclusivo a playa.</p><div class="room-price">$400 <span>/ noche</span></div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="features-section">
-        <div class="c">
-            <div class="features-grid">
-                <div class="fade-up"><div class="feature-icon"><i class="fas fa-swimming-pool"></i></div><h3>Piscina Infinita</h3><p>Vista al mar sin límites</p></div>
-                <div class="fade-up" style="animation-delay:0.1s"><div class="feature-icon"><i class="fas fa-spa"></i></div><h3>Spa & Wellness</h3><p>Tratamientos rejuvenecedores</p></div>
-                <div class="fade-up" style="animation-delay:0.2s"><div class="feature-icon"><i class="fas fa-utensils"></i></div><h3>Gastronomía</h3><p>Cocina marina premium</p></div>
-                <div class="fade-up" style="animation-delay:0.3s"><div class="feature-icon"><i class="fas fa-wind"></i></div><h3>Yoga & Meditación</h3><p>Sesiones al atardecer</p></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section" id="reservar">
-        <div class="c">
-            <div class="tc">
-                <h2 class="fade-up" style="font-size:42px;margin-bottom:15px;">Vive la Experiencia</h2>
-                <p class="fade-up" style="font-size:17px;opacity:0.9;margin-bottom:30px;">Reserva tu escape soñado</p>
-                <a href="#" class="btn fade-up" style="background:white;color:var(--primary);"><i class="fas fa-calendar-check"></i> Reservar Ahora</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="c">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo" style="color:white;">Aurora Cove</a>
-                    <p>Tu santuario junto al mar.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                <div class="room-card">
+                    <div class="room-image" style="position:relative;">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400" alt="Suite">
+                        <span class="room-badge">Más Popular</span>
+                    </div>
+                    <div class="room-content">
+                        <h3>Suite Vista Mar</h3>
+                        <p>Balcón privado con vista panorámica.</p>
+                        <div class="room-price">$180 <span>/ noche</span></div>
                     </div>
                 </div>
-                <div><h4 class="footer-title">Habitaciones</h4><ul class="footer-links"><li><a href="#">Suite Vista Mar</a></li><li><a href="#">Villa Jardín</a></li><li><a href="#">Presidencial</a></li></ul></div>
-                <div><h4 class="footer-title">Servicios</h4><ul class="footer-links"><li><a href="#">Spa</a></li><li><a href="#">Restaurante</a></li><li><a href="#">Actividades</a></li></ul></div>
-                <div><h4 class="footer-title">Contacto</h4><ul class="footer-links"><li><i class="fas fa-map-marker-alt"></i> Ecuador</li><li><i class="fas fa-phone"></i> +593 99 999 9999</li></ul></div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400" alt="Villa">
+                    </div>
+                    <div class="room-content">
+                        <h3>Villa Jardín</h3>
+                        <p>Villa privada con jardín y piscina.</p>
+                        <div class="room-price">$250 <span>/ noche</span></div>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400" alt="Presidencial">
+                    </div>
+                    <div class="room-content">
+                        <h3>Suite Presidencial</h3>
+                        <p>Jacuzzi y acceso exclusivo a playa.</p>
+                        <div class="room-price">$400 <span>/ noche</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div><div class="feature-icon"><i class="fas fa-swimming-pool"></i></div><h3 style="font-size:20px;margin-bottom:10px;">Piscina Infinita</h3><p style="color:rgba(255,255,255,0.7);font-size:14px;">Vista al mar sin límites</p></div>
+                <div><div class="feature-icon"><i class="fas fa-spa"></i></div><h3 style="font-size:20px;margin-bottom:10px;">Spa & Wellness</h3><p style="color:rgba(255,255,255,0.7);font-size:14px;">Tratamientos rejuvenecedores</p></div>
+                <div><div class="feature-icon"><i class="fas fa-utensils"></i></div><h3 style="font-size:20px;margin-bottom:10px;">Gastronomía</h3><p style="color:rgba(255,255,255,0.7);font-size:14px;">Cocina marina premium</p></div>
+                <div><div class="feature-icon"><i class="fas fa-wind"></i></div><h3 style="font-size:20px;margin-bottom:10px;">Yoga & Meditación</h3><p style="color:rgba(255,255,255,0.7);font-size:14px;">Sesiones al atardecer</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="reservar">
+        <div class="container">
+            <h2>Vive la Experiencia</h2>
+            <p style="margin-bottom:30px;">Reserva tu escape soñado</p>
+            <a href="#" class="btn" style="background:white;color:#14b8a6;">Reservar Ahora</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="logo" style="color:white;">Aurora Cove</a>
+                    <p style="color:rgba(255,255,255,0.6);margin:15px 0;font-size:14px;">Tu santuario junto al mar.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Habitaciones</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Suite Vista Mar</a></li>
+                        <li><a href="#">Villa Jardín</a></li>
+                        <li><a href="#">Presidencial</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Servicios</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Spa</a></li>
+                        <li><a href="#">Restaurante</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Contacto</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Ecuador</li>
+                        <li><i class="fas fa-phone"></i> +593 99 999 9999</li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">© 2026 Aurora Cove. Todos los derechos reservados.</div>
         </div>
     </footer>
-
-    <script>
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
-        const observer = new IntersectionObserver((e) => e.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.from('.hero-content > *', { duration: 1, y: 50, opacity: 0, stagger: 0.2, ease: 'power3.out' });
-    </script>
 </body>
 </html>
