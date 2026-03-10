@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aurora-cove.vercel.app/sitemap.xml

@@ -3,7 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurora Cove - Hotel Boutique</title>
+    <title>Aurora Cove - Hotel Boutique Ecuador</title>
+    <meta name="description" content="Aurora Cove - Hotel boutique frente al mar en Ecuador. Suite Vista Mar, Villa Jardín, Suite Presidencial. Piscina infinita, spa y gastronomía premium. ¡Reserva tu escape soñado!">
+    <meta name="keywords" content="hotel, boutique, Ecuador, playa, reservación,Suite Vista Mar, villa, spa, Piscina infinita, vacaciones">
+    <meta name="author" content="Aurora Cove">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Aurora Cove - Hotel Boutique">
+    <meta property="og:description" content="Donde el Océano Te Abraza. Una experiencia única de relajación y lujo natural.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aurora-cove.vercel.app">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200">
+    <meta property="og:site_name" content="Aurora Cove">
+    <meta property="og:locale" content="es_EC">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aurora Cove - Hotel Boutique">
+    <meta name="twitter:description" content="Donde el Océano Te Abraza. Reserva tu escape soñado.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Hotel",
+        "name": "Aurora Cove",
+        "description": "Hotel boutique frente al mar",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "EC"
+        },
+        "telephone": "+593999999999",
+        "priceRange": "$$$",
+        "amenities": ["Piscina", "Spa", "Restaurante", "WiFi"],
+        "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200"
+    }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -62,6 +100,25 @@
             .hero .container { flex-direction: column; text-align: center; }
             .hero-image { display: none; }
         }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float i { color: white; font-size: 28px; }
     </style>
 </head>
 <body>
@@ -83,7 +140,7 @@
                 <a href="#reservar" class="btn">Reservar</a>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600" alt="Hotel">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600" alt="Hotel">
             </div>
         </div>
     </section>
@@ -95,7 +152,7 @@
             <div class="rooms-grid">
                 <div class="room-card">
                     <div class="room-image" style="position:relative;">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400" alt="Suite">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400" alt="Suite">
                         <span class="room-badge">Más Popular</span>
                     </div>
                     <div class="room-content">
@@ -106,7 +163,7 @@
                 </div>
                 <div class="room-card">
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400" alt="Villa">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400" alt="Villa">
                     </div>
                     <div class="room-content">
                         <h3>Villa Jardín</h3>
@@ -116,7 +173,7 @@
                 </div>
                 <div class="room-card">
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400" alt="Presidencial">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400" alt="Presidencial">
                     </div>
                     <div class="room-content">
                         <h3>Suite Presidencial</h3>
@@ -180,5 +237,10 @@
             <div class="footer-bottom">© 2026 Aurora Cove. Todos los derechos reservados.</div>
         </div>
     </footer>
+    
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/593999999999" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 </html>
